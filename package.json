@@ -1,6 +1,6 @@
 {
   "name": "javascript-object-validator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Validates that properties exist on a JSON object",
   "main": "./src/javascriptObjectValidator.js",
   "scripts": {
