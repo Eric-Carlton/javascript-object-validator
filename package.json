@@ -2,7 +2,7 @@
   "name": "javascript-object-validator",
   "version": "1.0.0",
   "description": "Validates that properties exist on a JSON object",
-  "main": "src/javascriptObjectValidator.js",
+  "main": "./src/javascriptObjectValidator.js",
   "scripts": {
     "test": "istanbul cover jasmine",
     "lint": "eslint src spec"
