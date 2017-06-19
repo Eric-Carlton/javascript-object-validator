@@ -1,22 +1,22 @@
 {
-  "name": "json-object-validator",
+  "name": "javascript-object-validator",
   "version": "1.0.0",
   "description": "Validates that properties exist on a JSON object",
-  "main": "validator.js",
+  "main": "src/javascriptObjectValidator.js",
   "scripts": {
     "test": "istanbul cover jasmine",
     "lint": "eslint src spec"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Eric-Carlton/json-object-validator.git"
+    "url": "git+https://github.com/Eric-Carlton/javascript-object-validator.git"
   },
   "author": "eric121492@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Eric-Carlton/json-object-validator/issues"
+    "url": "https://github.com/Eric-Carlton/javascript-object-validator/issues"
   },
-  "homepage": "https://github.com/Eric-Carlton/json-object-validator#readme",
+  "homepage": "https://github.com/Eric-Carlton/javascript-object-validator#readme",
   "devDependencies": {
     "eslint": "^4.0.0",
     "eslint-config-google": "^0.8.0",

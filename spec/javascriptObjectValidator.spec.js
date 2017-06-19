@@ -1,6 +1,6 @@
 'use strict';
 
-const validate = require('../src/jsonObjectValidator');
+const validate = require('../src/javascriptObjectValidator');
 
 describe('jsonObjectValidator', () => {
     let obj;

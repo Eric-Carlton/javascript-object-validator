@@ -1,14 +1,4 @@
-# Javascript Object Validator
-
-# Installation
-
-You can install json-object-validator through npm: 
-```$ npm install javascript-object-validator```
-
-# Example Usage
-
-```
-const validate = require('javascript-object-validator');
+const validate = require('./src/javascriptObjectValidator');
 const toValidate = { name: 'John', age: 26, spouse: { name: 'Jane', age: NaN } };
 const requiredProperties = [
     // toValidate.name is required to be defined and not null
@@ -19,7 +9,7 @@ const requiredProperties = [
     // Use a custom error message if the property is invalid
     { required: 'spouse.name', invalidValues: [''], error: { message: 'spouse is required and must contain a name' } },
     // toValidate.spouse.age is required to be defined and not null or NaN.
-    // Use a custom error message if the property is invalid
+    // Use a custom error message if the property is invalid.
     { required: 'spouse.age', invalidValues: [NaN], error: { message: 'spouse is required and must contain an age' } },
     // one of toValidate.notThere or toValidate.alsoNotThere is required to be defined and not null
     { required: ['notThere', 'alsoNotThere'] }
@@ -66,5 +56,3 @@ console.log(validate(toValidate, [
         "errors":[]
     }
 */
-
-```

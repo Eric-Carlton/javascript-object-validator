@@ -43,8 +43,8 @@ module.exports = (object, propertyDescriptors, lazy) => {
         // doesObjectHaveAny expects propertyDescriptor.required to be an array.
         // If it's not, wrap it in an array
         if (!Array.isArray(propertyDescriptor.required)) {
-propertyDescriptor.required = [propertyDescriptor.required];
-}
+            propertyDescriptor.required = [propertyDescriptor.required];
+        }
 
         // object has none of the required properties, so valid should be set to
         // false and we need to push an error message
@@ -61,16 +61,16 @@ propertyDescriptor.required = [propertyDescriptor.required];
                 propertyDescriptor.required.forEach(
                     (requiredProperty, idx, arr) => {
                         if (arr.length > 1 && idx === arr.length - 1) {
-errorMessage += 'or ';
-}
+                            errorMessage += 'or ';
+                        }
 
                         errorMessage += requiredProperty;
 
                         if (arr.length > 2 && idx !== arr.length - 1) {
-errorMessage += ', ';
-} else if (arr.length >= 2) {
-errorMessage += ' ';
-}
+                            errorMessage += ', ';
+                        } else if (arr.length >= 2) {
+                            errorMessage += ' ';
+                        }
                     });
 
                 result.errors.push({message: errorMessage.trim()});
