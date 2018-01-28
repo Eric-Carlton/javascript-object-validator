@@ -1,6 +1,6 @@
 {
   "name": "javascript-object-validator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Validates that properties exist on a JSON object",
   "main": "./src/javascriptObjectValidator.js",
   "scripts": {
@@ -34,7 +34,7 @@
     },
     "extends": "google",
     "parserOptions": {
-        "ecmaVersion": 6
+      "ecmaVersion": 6
     }
   },
   "keywords": [
