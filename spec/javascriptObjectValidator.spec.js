@@ -53,7 +53,7 @@ describe('jsonObjectValidator', () => {
       expect(validationObject.valid).toBe(false);
       expect(validationObject.errors).toEqual([
         {
-          message: 'Object must ' + 'contain a valid value for notThere',
+          message: 'Object must contain a valid value for notThere',
         },
       ]);
     }
@@ -109,7 +109,7 @@ describe('jsonObjectValidator', () => {
       expect(validationObject.valid).toBe(false);
       expect(validationObject.errors).toEqual([
         {
-          message: 'Object must contain a valid' + ' value for notThere or a.h',
+          message: 'Object must contain a valid value for notThere or a.h',
         },
       ]);
     }

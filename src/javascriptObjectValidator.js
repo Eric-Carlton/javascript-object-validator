@@ -46,11 +46,9 @@ module.exports = (object, propertyDescriptors, lazy) => {
       propertyDescriptor.required = [propertyDescriptor.required];
     }
 
-    const isPropertyValid = doesObjectHaveAny(object, propertyDescriptor);
-
     // object has none of the required properties, so valid should be set to
     // false and we need to push an error message
-    if (!isPropertyValid) {
+    if (!doesObjectHaveAny(object, propertyDescriptor)) {
       result.valid = false;
 
       if (propertyDescriptor.error) {
@@ -69,7 +67,7 @@ module.exports = (object, propertyDescriptors, lazy) => {
 
           if (arr.length > 2 && idx !== arr.length - 1) {
             errorMessage += ', ';
-          } else if (arr.length >= 2) {
+          } else if (arr.length === 2) {
             errorMessage += ' ';
           }
         });
