@@ -3,14 +3,30 @@
 # Installation
 
 You can install json-object-validator through npm: 
-```$ npm install javascript-object-validator```
+`$ npm install javascript-object-validator`
+
+# Changelog
+
+## 1.0.1
+
+* fixed "main" in package.json
+
+## 1.0.2
+
+* added keywords to package.json
+
+## 1.0.3
+
+* Added Prettier
+* Added pre-commit script to lint, prettify, and run unit tests
+* Corrected incorrect usages of Array.some and Array.every
 
 # Example Usage
 
 ```
-const validate = require('javascript-object-validator');
-const toValidate = { name: 'John', age: 26, spouse: { name: 'Jane', age: NaN } };
-const requiredProperties = [
+const validate = require('javascript-object-validator'),
+    toValidate = { name: 'John', age: 26, spouse: { name: 'Jane', age: NaN } },
+    requiredProperties = [
     // toValidate.name is required to be defined and not null
     { required: 'name' },
     // toValidate.age is required to be defined and not null or NaN

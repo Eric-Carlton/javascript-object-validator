@@ -34,55 +34,56 @@
  *  }
  */
 module.exports = (object, propertyDescriptors, lazy) => {
-    let result = {
-        valid: true,
-        errors: [],
-    };
+  const result = {
+    valid: true,
+    errors: [],
+  };
 
-    propertyDescriptors.some((propertyDescriptor) => {
-        // doesObjectHaveAny expects propertyDescriptor.required to be an array.
-        // If it's not, wrap it in an array
-        if (!Array.isArray(propertyDescriptor.required)) {
-            propertyDescriptor.required = [propertyDescriptor.required];
-        }
+  for (let propertyDescriptor of propertyDescriptors) {
+    // doesObjectHaveAny expects propertyDescriptor.required to be an array.
+    // If it's not, wrap it in an array
+    if (!Array.isArray(propertyDescriptor.required)) {
+      propertyDescriptor.required = [propertyDescriptor.required];
+    }
 
-        // object has none of the required properties, so valid should be set to
-        // false and we need to push an error message
-        if (!doesObjectHaveAny(object, propertyDescriptor)) {
-            result.valid = false;
+    const isPropertyValid = doesObjectHaveAny(object, propertyDescriptor);
 
-            if (propertyDescriptor.error) {
-                result.errors.push(propertyDescriptor.error);
-            } else {
-                // default error message format is: 'Object must contain a
-                // valid value for x, y, or z'
-                let errorMessage = 'Object must contain a valid value for ';
+    // object has none of the required properties, so valid should be set to
+    // false and we need to push an error message
+    if (!isPropertyValid) {
+      result.valid = false;
 
-                propertyDescriptor.required.forEach(
-                    (requiredProperty, idx, arr) => {
-                        if (arr.length > 1 && idx === arr.length - 1) {
-                            errorMessage += 'or ';
-                        }
+      if (propertyDescriptor.error) {
+        result.errors.push(propertyDescriptor.error);
+      } else {
+        // default error message format is: 'Object must contain a
+        // valid value for x, y, or z'
+        let errorMessage = 'Object must contain a valid value for ';
 
-                        errorMessage += requiredProperty;
+        propertyDescriptor.required.forEach((requiredProperty, idx, arr) => {
+          if (arr.length > 1 && idx === arr.length - 1) {
+            errorMessage += 'or ';
+          }
 
-                        if (arr.length > 2 && idx !== arr.length - 1) {
-                            errorMessage += ', ';
-                        } else if (arr.length >= 2) {
-                            errorMessage += ' ';
-                        }
-                    });
+          errorMessage += requiredProperty;
 
-                result.errors.push({message: errorMessage.trim()});
-            }
+          if (arr.length > 2 && idx !== arr.length - 1) {
+            errorMessage += ', ';
+          } else if (arr.length >= 2) {
+            errorMessage += ' ';
+          }
+        });
 
-            // if we're using lazy evaluation, execution can stop now -
-            // we know that the object is invalid
-            if (lazy) return true;
-        }
-    });
+        result.errors.push({message: errorMessage.trim()});
+      }
 
-    return result;
+      // if we're using lazy evaluation, execution can stop now -
+      // we know that the object is invalid
+      if (lazy) return result;
+    }
+  }
+
+  return result;
 };
 
 /**
@@ -99,30 +100,24 @@ module.exports = (object, propertyDescriptors, lazy) => {
  * @return {boolean} true if property described is valid, false otherwise.
  */
 function doesObjectHaveProperty(curVal, propertyString, invalidValues) {
-    // given that property is a.b, we need to first check object for a, then
-    // object.a for b. split on "." so that we have each property on its own
-    const splitProperties = propertyString.split('.');
+  // given that property is a.b, we need to first check object for a, then
+  // object.a for b. split on "." so that we have each property on its own
+  // object['a'] will return object.a. However, object['a.b'] will not return
+  // object.a.b in order to get object.a.b, the correct syntax is
+  // object['a']['b']. To accomplish this, we check that the object in
+  // context has the property and its value is not undefined or null
+  const containsProperty = propertyString.split('.').every((property) => {
+    curVal = curVal[property];
 
-    let containsProperty = true;
+    return curVal !== undefined && curVal !== null;
+  });
 
-    // object['a'] will return object.a. However, object['a.b'] will not return
-    // object.a.b in order to get object.a.b, the correct syntax is
-    // object['a']['b']. To accomplish this, we check that the object in
-    // context has the property and its value is not undefined or null
-    splitProperties.every((property) => {
-        curVal = curVal[property];
-
-        containsProperty = curVal !== undefined && curVal !== null;
-        return containsProperty;
-    });
-
-    // if containsProperty is true then we know curVal is not undefined or null.
-    // additionally, if invalidValues is provided, then we need to make sure
-    // that the value isn't otherwise invalid.
-    containsProperty = containsProperty &&
-        (!invalidValues || !invalidValues.includes(curVal));
-
-    return containsProperty;
+  // if containsProperty is true then we know curVal is not undefined or null.
+  // additionally, if invalidValues is provided, then we need to make sure
+  // that the value isn't otherwise invalid.
+  return (
+    containsProperty && (!invalidValues || !invalidValues.includes(curVal))
+  );
 }
 
 /**
@@ -150,16 +145,13 @@ function doesObjectHaveProperty(curVal, propertyString, invalidValues) {
  * requirePropertyDescriptor.required
  */
 function doesObjectHaveAny(object, requiredPropertyDescriptor) {
-    let result = null;
-
-    requiredPropertyDescriptor.required.some((requiredProperty) => {
-        // if any of the required properties exist, we don't need
-        // to continue checking
-        result = doesObjectHaveProperty(object, requiredProperty,
-            requiredPropertyDescriptor.invalidValues);
-
-        return result;
-    });
-
-    return result;
+  // if any of the required properties exist, we don't need
+  // to continue checking
+  return requiredPropertyDescriptor.required.some((requiredProperty) =>
+    doesObjectHaveProperty(
+      object,
+      requiredProperty,
+      requiredPropertyDescriptor.invalidValues
+    )
+  );
 }
