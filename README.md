@@ -21,6 +21,15 @@ You can install json-object-validator through npm:
 * Added pre-commit script to lint, prettify, and run unit tests
 * Corrected incorrect usages of Array.some and Array.every
 
+## 1.0.4
+
+* fixed some internal code issues to make code more readable
+* removed installHooks task from test script
+
+## 1.0.5
+
+* Updated pre-commit script to run tests even if no files are staged for to be prettified and linted
+
 # Example Usage
 
 ```
