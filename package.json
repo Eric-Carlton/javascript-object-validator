@@ -4,7 +4,7 @@
   "description": "Validates that properties exist on a JSON object",
   "main": "./src/javascriptObjectValidator.js",
   "scripts": {
-    "test": "npm run installHooks && istanbul cover jasmine",
+    "test": "istanbul cover jasmine",
     "lint": "eslint --fix src spec example.js",
     "prettier": "prettier {./,./src,./spec}/*.js --write",
     "installHooks": "chmod +x ./hooks/* && cp ./hooks/* ./.git/hooks",
