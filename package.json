@@ -1,6 +1,6 @@
 {
   "name": "javascript-object-validator",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Validates that properties exist on a JSON object",
   "main": "./src/javascriptObjectValidator.js",
   "scripts": {
@@ -21,12 +21,12 @@
   },
   "homepage": "https://github.com/Eric-Carlton/javascript-object-validator#readme",
   "devDependencies": {
-    "eslint": "^4.16.0",
+    "eslint": "^4.19.1",
     "eslint-config-google": "^0.8.1",
     "istanbul": "^0.4.5",
-    "jasmine": "^2.9.0",
-    "npm": "^5.6.0",
-    "prettier": "^1.10.2"
+    "jasmine": "^2.99.0",
+    "npm": "^6.9.0",
+    "prettier": "^1.18.2"
   },
   "eslintConfig": {
     "env": {

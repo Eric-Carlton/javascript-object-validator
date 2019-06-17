@@ -2,33 +2,37 @@
 
 # Installation
 
-You can install json-object-validator through npm: 
+You can install json-object-validator through npm:
 `$ npm install javascript-object-validator`
 
 # Changelog
 
 ## 1.0.1
 
-* fixed "main" in package.json
+- fixed "main" in package.json
 
 ## 1.0.2
 
-* added keywords to package.json
+- added keywords to package.json
 
 ## 1.0.3
 
-* Added Prettier
-* Added pre-commit script to lint, prettify, and run unit tests
-* Corrected incorrect usages of Array.some and Array.every
+- Added Prettier
+- Added pre-commit script to lint, prettify, and run unit tests
+- Corrected incorrect usages of Array.some and Array.every
 
 ## 1.0.4
 
-* fixed some internal code issues to make code more readable
-* removed installHooks task from test script
+- fixed some internal code issues to make code more readable
+- removed installHooks task from test script
 
 ## 1.0.5
 
-* Updated pre-commit script to run tests even if no files are staged for to be prettified and linted
+- Updated pre-commit script to run tests even if no files are staged for to be prettified and linted
+
+## 1.0.6
+
+- Updated deps to address vulnerabilities identified by npm audit
 
 # Example Usage
 
@@ -52,14 +56,14 @@ const validate = require('javascript-object-validator'),
 
 // validate the object
 console.log(validate(toValidate, requiredProperties));
-/* 
-    {  
+/*
+    {
         "valid":false,
-        "errors":[  
-            {  
+        "errors":[
+            {
                 "message":"spouse is required and must contain an age"
             },
-            {  
+            {
                 "message":"Object must contain a valid value for notThere or alsoNotThere"
             }
         ]
@@ -68,11 +72,11 @@ console.log(validate(toValidate, requiredProperties));
 
 // validate the object, but stop at the first error
 console.log(validate(toValidate, requiredProperties, true));
-/* 
-    {  
+/*
+    {
         "valid":false,
-        "errors":[  
-            {  
+        "errors":[
+            {
                 "message":"spouse is required and must contain an age"
             }
         ]
